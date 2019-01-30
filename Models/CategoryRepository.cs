@@ -18,7 +18,7 @@ namespace NewsApp.Models
 
         public Category GetById(int id)
         {
-            return _context.Categories.Single(x => x.Id == id);
+            return _context.Categories.Single(x => x.Id == id);//Här blev det exception när man hade med kategori-id som ej finns
         }
     }
 }

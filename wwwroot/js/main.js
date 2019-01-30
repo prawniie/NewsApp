@@ -27,6 +27,7 @@ async function clickShowAllNews() {
         for (let n of allNews) {
             html += `<tr><td>${n.id}</td><td>${n.header}</td><td>${n.intro}</td><td>${n.createdDate}</td><td>${n.updatedDate}</td><td><button>Update</button></td></tr>`;
         }
+        //Vet ej hur jag ska skriva ut kategorin
 
         document.getElementById("newsList").innerHTML = html + `</table>`;
 
@@ -39,16 +40,52 @@ async function clickShowAllNews() {
 
 async function clickAddNews() {
 
+    let header = document.getElementById("addAreaHeader").value;
+    let category = document.getElementById("addAreaCategory").value;
+    let categoryText = document.getElementById("addAreaCategory").text;
+    let intro = document.getElementById("addAreaIntro").value;
+    let body = document.getElementById("addAreaBody").value;
+
     let response = await fetch(`api/News`, {
         method: "POST",
         body: JSON.stringify(
             {
-                header: "NY post",
-                intro: "Testar att lägga till en ny..",
-                body: "Massa text här..",
+                header: header,
+                category: { id: category, name: categoryText },
+                intro: intro,
+                body: body
             }),
         headers: {
             "Content-Type": "application/json"
         }
     });
+
+    if (response.status === 200) {
+        let areaError = document.getElementById("addAreaError");
+        areaError.style.color = "green";
+        areaError.innerText = 'Post successfully added!';
+    }
+}
+
+async function clickStatArea() {
+
+    let response = await fetch(`api/news/count`);
+    let result = "";
+
+    if (response.status === 200) {
+        result = await response.text();
+
+        let nrOfNews = document.getElementById("nrOfNews");
+        nrOfNews.innerHTML = result;
+    }
+    else {
+        let nrOfNews = document.getElementById("nrOfNews");
+        nrOfNews.style.color = "red";
+        nrOfNews.innerText = 'Something went wrong..';
+    }
+
+
+
+
+
 }
