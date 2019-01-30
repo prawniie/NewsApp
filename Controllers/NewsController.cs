@@ -69,14 +69,14 @@ namespace NewsApp.Controllers
             news.CreatedDate = DateTime.Now;
             news.UpdatedDate = DateTime.Now;
 
-            if (news.Category.Id != null)
+            if (news.Category?.Id != null)
             {
                 Category c = _categoryRepository.GetById((int)news.Category.Id);
                 news.Category = c;
             }
 
             // Förhindra att ny kategori skapas om ingen anges
-            if (news.Category.Id == null)
+            if (news.Category?.Id == null)
                 news.Category = null;
 
             _newsRepository.Add(news);
