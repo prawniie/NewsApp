@@ -39,9 +39,12 @@
 
     <div id="updateArea">
         <h3>Update</h3>
-        Id: <input id="updateAreaId" type="text" readonly="readonly" />
+        Id: <input id="updateAreaId" type="text" />  <!--tagit bort readonly="readonly"-->
         Header: <input id="updateAreaHeader" type="text" />
-        Category: <select id="updateAreaCategory"></select>
+        Category: <select id="addAreaCategory">
+            <option value="4003">Australia</option>
+            <option value="4004">Nature</option>
+        </select>
         Intro: <input id="updateAreaIntro" type="text" />
         Body: <input id="updateAreaBody" type="text" />
         <button onclick="clickUpdateNews()">Update</button>

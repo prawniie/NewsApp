@@ -84,8 +84,56 @@ async function clickStatArea() {
         nrOfNews.innerText = 'Something went wrong..';
     }
 
+}
+
+    //PUT KOD
+    //{
+    //    "id": 7,
+    //        "header": "Våren",
+    //            "body": "Är i antågande..",
+    //                "intro": "Vår feeling",
+    //                    "category": {
+    //        "id": 2
+    //    }
+    //}
+
+async function clickUpdateNews() {
+    let id = document.getElementById("updateAreaId").value;
+    let header = document.getElementById("updateAreaHeader").value;
+    let category = document.getElementById("updateAreaCategory").value;
+    let categoryText = document.getElementById("addAreaCategory").text;
+    let intro = document.getElementById("updateAreaIntro").value;
+    let body = document.getElementById("updateAreaBody").value;
+
+    let response = await fetch(`api/News`, {
+        method: "PUT",
+        body: JSON.stringify(
+            {
+                id: id,
+                header: header,
+                category: { id: category, name: categoryText },
+                intro: intro,
+                body: body
+            }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (response.status === 200) {
+        console.log('Going well..')
+        result = await response.text();
+        let updateAreaError = document.getElementById("updateAreaError");
+        updateAreaError.innerText = result;
+    }
+    else {
+        let updateAreaError = document.getElementById("updateAreaError");
+        updateAreaError.innerText = 'Gick ju sådär..';
+    }
 
 
 
 
+
+    
 }
