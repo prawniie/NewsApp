@@ -36,3 +36,19 @@ async function clickShowAllNews() {
         console.log('Something went wrong..');
     }
 }
+
+async function clickAddNews() {
+
+    let response = await fetch(`api/News`, {
+        method: "POST",
+        body: JSON.stringify(
+            {
+                header: "NY post",
+                intro: "Testar att lägga till en ny..",
+                body: "Massa text här..",
+            }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+}
